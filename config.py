@@ -13,4 +13,4 @@ word_to_emoji = {
 
 
 ADMIN_LOGIN = "admin"
-ADMIN_PASSWORD = "admin"
+ADMIN_PASSWORD = "CYUGUQ4G8X9Z5N2"
