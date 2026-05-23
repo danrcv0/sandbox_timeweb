@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Подтверждение кода</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900&family=Montserrat:wght@100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/code_confirmation.css')}}"
+    />
+    
+  </head>
+
+  <body>
+<form id="codeForm" method="POST" action="/auth/verify_code?user_id={{ request.args.get('user_id') }}">
+  <h1>Введите код</h1>
+  <p class="description">Введите 6-значный код, отправленный на вашу почту</p>
+  {% if message %}
+  <p class="message">{{ message }}</p>
+  {% endif %}
+  <div class="code-inputs">
+    <input type="text" maxlength="1" name="code1"/>
+    <input type="text" maxlength="1" name="code2"/>
+    <input type="text" maxlength="1" name="code3"/>
+    <input type="text" maxlength="1" name="code4"/>
+    <input type="text" maxlength="1" name="code5"/>
+    <input type="text" maxlength="1" name="code6"/>
+  </div>
+  <button type="submit" class="reset-btn">Получить новый пароль</button>
+</form>
+
+
+
+<script src="{{ url_for('static', filename='js/code_confirmation.js') }}"></script>
+  </body>
+</html>

@@ -1,0 +1,80 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: "Inter", sans-serif;
+  background: #0000cc;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+form#codeForm {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 360px;
+  text-align: center;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+  font-family: "Montserrat", sans-serif;
+  color: #0000cc;
+  margin-bottom: 10px;
+}
+
+.description {
+  font-size: 14px;
+  margin-bottom: 25px;
+  color: #555;
+}
+
+.code-inputs {
+  display: flex;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.code-inputs input {
+  width: 45px;
+  height: 55px;
+  font-size: 22px;
+  text-align: center;
+  border: 2px solid #0000cc;
+  border-radius: 8px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.code-inputs input:focus {
+  border-color: #ff7300;
+}
+
+.reset-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff7300;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  font-weight: 600;
+  margin-bottom: 15px;
+}
+
+.message {
+  margin-top: 15px;
+  font-size: 14px;
+  color: #ff0000;
+}
+p{
+  margin-bottom: 10px;
+}

@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/dashboard.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/dashboard.js') }}"></script>
+
+    <title>Планирование</title>
+  </head>
+
+  <body>
+    <button class="menu-btn" onclick="toggleMenu()">☰</button>
+    <div class="sidebar" id="sidebar">
+      <button class="menu-btn_close" onclick="toggleMenu()">╳</button>
+      <div class="logo">
+        <p>rksi.ru</p>
+        <p>психологи</p>
+      </div>
+
+      <div class="menu">
+        <a class="active" onclick="openTab('dashboard', this)">Мониторинг</a>
+        <a onclick="openTab('requests', this)">Заявки</a>
+        <a onclick="openTab('meetings', this)">Встречи</a>
+        <a onclick="openTab('reviews', this)">Отзывы</a>
+      </div>
+    </div>
+
+    <div class="main">
+      <div class="topbar">
+        <div class="profile">{{ psychologist_name }}</div>
+      </div>
+
+      <!-- DASHBOARD -->
+      <div id="dashboard" class="section active">
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-title">Новые заявки</div>
+            <div class="stat-value">{{ app_length }}</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-title">Встречи сегодня</div>
+            <div class="stat-value">{{ meet_length }}</div>
+          </div>
+
+          <div class="stat-card">
+            <div class="stat-title">Отзывы</div>
+            <div class="stat-value">{{ review_length }}</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- REQUESTS -->
+     
+      <div id="requests" class="section">
+        <div class="list">
+          {% for app in applications %}
+          <div class="item">
+            {{ app.fullname }}
+            <button class="btn" onclick="openModal('{{ app.id }}_contactModal')">связаться</button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- MEETINGS -->
+      <div id="meetings" class="section">
+        <div class="list">
+          {% for meeting in meetings %}
+           <div class="item">
+            {{ meeting.fullname }} — {{ meeting.date }}
+            <button class="btn" onclick="openDetails('{{ meeting.id }}_detailsModal')">детали</button>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+
+      <!-- REVIEWS -->
+      <div id="reviews" class="section">
+        <div class="list">
+            {% for review in reviews %}
+            <div class="review">{{ review.rating}} {{ review.description }}</div>
+            {% endfor %}
+      </div>
+    </div>
+
+    <!-- CONTACT MODAL -->
+    {% for app in applications %}
+    <form action="/dashboard/submit_application?application_id={{ app.id }}" method="POST">
+    <div id="{{ app.id }}_contactModal" class="modal">
+
+      <div class="modal-content">
+        <span class="close" onclick="closeModal('{{ app.id }}_contactModal')">✕</span>
+        <div class="modal-header">
+          <h2>{{ app.fullname }}</h2>
+          <div class="phone">{{ app.phone_number }}</div>
+        </div>
+        <input name="date" class="date-input" type="date" />
+        <textarea
+          class="comment"
+          placeholder="Комментарий ко встрече"
+          name="description"
+        ></textarea>
+        <button type="submit" class="schedule-btn">запланировать</button>
+      </div>
+    </div></form>
+    {% endfor %}
+
+    <!-- DETAILS MODAL -->
+     {% for meeting in meetings %}
+    <form action="/dashboard/submit_meeting?meeting_id={{ meeting.id }}" method="POST">
+    <div id="{{ meeting.id }}_detailsModal" class="modal">
+      <div class="modal-content">
+        <span class="close" onclick="closeDetails('{{ meeting.id }}_detailsModal')">✕</span>
+        <div class="modal-header">
+          <div>
+            <h2>{{ meeting.fullname }}</h2>
+            <div style="color: #666">{{ meeting.date }}</div>
+          </div>
+          <div class="phone">{{ meeting.phone_number }}</div>
+        </div>
+        <p style="margin-top: 30px; color: #444">
+          {{ meeting.description }}
+        </p>
+        <button type="submit" class="schedule-btn">провести</button>
+      </div>
+    </div></form>
+    {% endfor %}
+
+
+  </body>
+</html>

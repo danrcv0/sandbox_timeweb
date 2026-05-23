@@ -1,0 +1,309 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>РКСИ психологи</title>
+
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/main.css') }}"
+    />
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+
+  <body>
+    <header>
+      <div class="logo">
+        <p>rksi.ru</p>
+        <p>психологи</p>
+      </div>
+
+      <div class="button">
+        <a class="btn_about_us" href="#about_us"><p>о нас</p></a>
+        <a class="btn_reviews" href="#reviews"><p>отзывы</p></a>
+        <a class="btn_submit" href="#submit"><p>связаться</p></a>
+      </div>
+    </header>
+
+    <div class="header_preview">
+      <div>
+        <h1>
+          ИНДИВИДУАЛЬНЫЕ
+          <p>ПСИХОЛОГИЧЕСКИЕ</p>
+          КОНСУЛЬТАЦИИ
+        </h1>
+
+        <p>
+          Счастье наступает тогда, когда ты выстраиваешь внутренние границы - с
+          собой и внешние - с миром и окружающими, и берешь на себя
+          ответственность за свои решения
+        </p>
+
+        <a class="preview_button" href="#submit"><p>записаться</p></a>
+      </div>
+
+      <img
+        src="{{ url_for('static', filename='images/header_preview/brain.png') }}"
+        alt=""
+      />
+    </div>
+
+    <div class="main_topical_issues">
+      <h1>
+        С чем
+        <p>поможет</p>
+        психолог?
+      </h1>
+
+      <div class="item">
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/main_topical_issues/image_first.png') }}"
+          />
+          <p>наладить гармоничные отношения с близкими людьми</p>
+        </div>
+
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/main_topical_issues/image_second.png') }}"
+          />
+          <p>справиться со стрессом, тревогой и страхом</p>
+        </div>
+
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/main_topical_issues/image_third.png') }}"
+          />
+          <p>принять себя и повысить самооценку</p>
+        </div>
+      </div>
+
+      <div class="item">
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/main_topical_issues/image_fourth.png') }}"
+          />
+          <p>научиться говорить “нет” и отстаивать границы</p>
+        </div>
+
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/main_topical_issues/image_fifth.png') }}"
+          />
+          <p>пережить перемены: переезд, расставание, потеря работы</p>
+        </div>
+
+        <div>
+          <img
+            src="{{ url_for('static', filename='images/main_topical_issues/image_sixth.png') }}"
+          />
+          <p>понять, почему в жизни проблемы и нет мотивации</p>
+        </div>
+      </div>
+
+      <a href="#submit">Хочу обсудить свою ситуацию!</a>
+    </div>
+
+    <div class="about_us" id="about_us">
+      <div>
+        <img
+          src="{{ url_for('static', filename='images/psychologists/Bokylyarova.png') }}"
+        />
+
+        <div class="text" id="kochybei">
+          <h1>Бокулярова Ирина Николаевна</h1>
+          <p>
+            Я - психолог и мне знакомо, что студенческая жизнь — 
+            это не только сессии и пары. Это ещё и моменты, когда 
+            совсем нет сил, когда тревожно и хочется спрятаться от всех, 
+            а внутри нарастает пустота и усталость. Бывает обидно и одиноко, даже когда вокруг люди. 
+          </p>
+        </div>
+      </div>
+
+      <div>
+        <div class="text" id="bbkn">
+          <h1>Нефедова Евгения Михайловна</h1>
+          <p>
+            Ко мне приходят с трудностями адаптации и снижением мотивации,
+             просят помочь с конфликтами: с одногруппниками, преподавателями 
+             или родителями. Приходят и с тревогой перед экзаменами, и с чувством
+              одиночества, и с мыслями о том, правильно ли выбрана специальность.
+               Я не ставлю оценок — здесь можно говорить открыто, без страха осуждения.
+          </p>
+        </div>
+
+        <img
+          src="{{ url_for('static', filename='images/psychologists/Nefedova.png') }}"
+        />
+      </div>
+    </div>
+
+    <div
+      class="reviews"
+      id="reviews"
+      style="background-image: url('../static/images/backgrounds/reviews.png')"
+    >
+      <h1>Последние отзывы</h1>
+
+      {% for review in reviews %}
+      <div>
+        <img
+          src="{{ url_for('static', filename='images/emotion/' + review.rating + '.png') }}"
+        />
+        <p>
+          {{ review.description }}
+        </p>
+      </div>
+      {% endfor %}
+
+
+      <a
+        class="reviews_btn"
+        href=""
+        style="background-image: url(../static/images/buttons/reviews_btn.png)"
+      >
+        <p>оставить отзыв</p>
+      </a>
+    </div>
+
+    <div
+      class="submit"
+      id="submit"
+      style="
+        background-image: url(../static/images/backgrounds/submit_background.png);
+      "
+    >
+      <h1><span>“Честно”</span> - разберемся в том, что волнует</h1>
+
+      <div>
+        <form action="/submit" method="post">
+        <input id="name" name="name" maxlength="70" placeholder="Ваше имя" required />
+        <input
+          id="phone_number"
+          name="phone_number"
+          maxlength="11"
+          placeholder="Номер телефона"
+          required
+        />
+        <input type="email" id="email" name="email" placeholder="your@email.com" required />
+      </div>
+
+      <button type="submit" class="submit_btn">записаться</button></form>
+    </div>
+
+    <footer>
+      <h1>Контакты</h1>
+
+      <div class="content">
+        <div>
+          <h2>Бокулярова И.Н</h2>
+          <p>Каб. 102 (ул. Тургеневская, 10/6)</p>
+          <p>bakylyarova@edu.rksi.ru</p>
+        </div>
+
+        <div>
+          <h2>Нефедова Е.М</h2>
+          <p>Каб. 101а (ул. Тургеневская, 10/6)</p>
+          <p>nefedova@edu.rksi.ru</p>
+        </div>
+      </div>
+
+      <h1 class="mob_rksi">Моб. РКСИ 8 (863) 206-88-88</h1>
+    </footer>
+
+    <!-- Модальное окно (скрыто по умолчанию) -->
+    <div class="modal-overlay" id="modalOverlay">
+      <div class="modal-content">
+        <!-- Кнопка закрытия -->
+        <button class="modal-close">&times;</button>
+
+        <h2>Какое впечатление у вас осталось?</h2>
+
+        <!-- Форма отзыва -->
+        <form
+          class="review-form"
+          id="reviewForm"
+          action="/submit-review"
+          method="POST"
+        >
+          <div class="form-group">
+            <label for="email">Электронная почта</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              placeholder="your@email.com"
+              required
+            />
+          </div>
+
+          <div class="form-group">
+            <label for="review">Введите текст. Макс 200 символов</label>
+            <textarea
+              id="review"
+              maxlength="200"
+              rows="4"
+              placeholder="Ваш отзыв..."
+              required
+            ></textarea>
+            <div class="char-counter">0/200</div>
+          </div>
+
+          <!-- Рейтинг (эмодзи) -->
+          <div class="rating">
+            <span class="rating-label">Ваша оценка:</span>
+            <div class="emoji-rating">
+              <label class="emoji-option">
+                <input type="radio" name="rating" value="loving" hidden />
+                <img
+                  src="../static/images/emotion/loving.png"
+                  alt="5/5"
+                />
+              </label>
+              <label class="emoji-option">
+                <input type="radio" name="rating" value="happy" hidden />
+                <img
+                  src="../static/images/emotion/happy.png"
+                  alt="4/5"
+                />
+              </label>
+              <label class="emoji-option">
+                <input type="radio" name="rating" value="skeptical" hidden />
+                <img
+                  src="../static/images/emotion/skeptical.png"
+                  alt="3/5"
+                />
+              </label>
+              <label class="emoji-option">
+                <input type="radio" name="rating" value="sad" hidden />
+                <img
+                  src="../static/images/emotion/sad.png"
+                  alt="2/5"
+                />
+              </label>
+              <label class="emoji-option">
+                <input type="radio" name="rating" value="angry" hidden />
+                <img
+                  src="../static/images/emotion/angry.png"
+                  alt="1/5"
+                />
+              </label>
+            </div>
+          </div>
+
+          <button type="submit" class="submit-btn">Отправить отзыв</button>
+        </form>
+      </div>
+    </div>
+  </body>
+</html>

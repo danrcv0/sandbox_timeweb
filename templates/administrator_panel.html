@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/administrator_panel.css') }}" />
+  <script src="{{ url_for('static', filename='js/administrator_panel.js') }}"></script>
+  <title>Администрирование</title>
+</head>
+<body>
+  <button class="menu-btn" onclick="toggleMenu()">☰</button>
+  <div class="sidebar" id="sidebar">
+    <button class="menu-btn_close" onclick="toggleMenu()">╳</button>
+    <div class="logo">
+      <p>rksi.ru</p>
+      <p>админ</p>
+    </div>
+    <div class="menu">
+      <a class="active" onclick="openTab('requests',this)">Заявки</a>
+      <a onclick="openTab('meetings',this)">Встречи</a>
+      <a onclick="openTab('reviews',this)">Отзывы</a>
+      <a onclick="openTab('psychologists',this)">Психологи</a>
+    </div>
+  </div>
+
+  <div class="main">
+    <div class="topbar">
+      <div class="profile">Админ</div>
+    </div>
+
+    <!-- REQUESTS -->
+    <div id="requests" class="section active">
+      <div class="list">
+        {% for app in applications %}
+        <div class="item">
+          {{ app.fullname }}
+          <div>
+            <button class="btn" onclick="openEdit('app_{{ app.id }}')">✏️</button>
+            <a class="btn"  href="/administration/delete?app_id={{ app.id }}">🗑️</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- MEETINGS -->
+    <div id="meetings" class="section">
+      <div class="list">
+        {% for meet in meetings %}
+        <div class="item">
+          {{ meet.fullname }} — {{ meet.date }}
+          <div>
+            <button class="btn" onclick="openEdit('meet_{{ meet.id }}')">✏️</button>
+            <a class="btn"  href="/administration/delete?meet_id={{ meet.id }}">🗑️</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- REVIEWS -->
+    <div id="reviews" class="section">
+      <div class="list">
+        {% for rev in reviews %}
+        <div class="item">
+          {{ rev.rating }} — {{ rev.description }}
+          <div>
+            <button class="btn" onclick="openEdit('rev_{{ rev.id }}')">✏️</button>
+            <a class="btn"  href="/administration/delete?rev_id={{ rev.id }}">🗑️</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <!-- PSYCHOLOGISTS -->
+    <div id="psychologists" class="section">
+      <div class="list">
+        {% for psy in psychologists %}
+        <div class="item">
+          {{ psy.name }} — {{ psy.email }}
+          <div>
+            <button class="btn" onclick="openEdit('psy_{{ psy.id }}')">✏️</button>
+            <a class="btn"  href="/administration/delete?psy_id={{ psy.id }}">🗑️</a>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+      <div style="margin-top:20px;">
+        <h3>Добавить нового психолога</h3>
+        <form method="POST" class="modal-content" action="/administration/add_psychologist" style="display:block;position:relative;max-width:500px;">
+          <input type="text" name="name" placeholder="Имя Фамилия" class="date-input"/>
+          <input type="email" name="email" placeholder="Почта" class="date-input"/>
+          <input type="password" name="password" placeholder="Пароль" class="date-input"/>
+          <button type="submit" class="schedule-btn">Добавить</button>
+        </form>
+      </div>
+    </div>
+
+    <!-- EDIT MODALS -->
+    {% for app in applications %}
+    <form action="/administration/edit_application?app_id={{ app.id }}" method="POST">
+        <div id="app_{{ app.id }}" class="modal">
+        <div class="modal-content">
+            <span class="close" onclick="closeEdit('app_{{ app.id }}')">✕</span>
+            <input type="text" value="{{ app.fullname }}" class="date-input"/>
+            <textarea class="comment">{{ app.comment }}</textarea>
+            <button class="schedule-btn">Сохранить</button>
+        </div>
+        </div>
+    </form>
+
+    {% endfor %}
+
+    {% for meet in meetings %}
+    <form action="/administration/edit_meeting?meet_id={{ meet.id }}" method="POST">
+        <div id="meet_{{ meet.id }}" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeEdit('meet_{{ meet.id }}')">✕</span>
+            <input type="text" value="{{ meet.fullname }}" class="date-input"/>
+            <input type="date" value="{{ meet.date }}" class="date-input"/>
+        <textarea class="comment">{{ meet.description }}</textarea>
+        <button class="schedule-btn">Сохранить</button>
+      </div>
+    </div>
+    </form>
+    {% endfor %}
+
+    {% for rev in reviews %}
+    <form action="/administration/edit_review?rev_id={{ rev.id }}" method="POST">
+        <div id="rev_{{ rev.id }}" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeEdit('rev_{{ rev.id }}')">✕</span>
+            <input type="text" value="{{ rev.email }}" class="date-input"/>
+            <textarea class="comment">{{ rev.description }}</textarea>
+        <button class="schedule-btn">Сохранить</button>
+      </div>
+    </div>
+    </form>
+    {% endfor %}
+
+    {% for psy in psychologists %}
+    <form action="/administration/edit_psychologist?psy_id={{ psy.id }}" method="POST">
+        <div id="psy_{{ psy.id }}" class="modal">
+          <div class="modal-content">
+            <span class="close" onclick="closeEdit('psy_{{ psy.id }}')">✕</span>
+            <input type="text" name="name" value="{{ psy.name }}" placeholder="ФИО" class="date-input"/>
+            <input type="email" name="email" value="{{ psy.email }}" placeholder="Почта" class="date-input"/>
+            <input type="login" name="login" value="{{ psy.login }}" placeholder="Логин" class="date-input"/>
+            <input type="text" name="password"  value="{{ psy.password }}" placeholder="Пароль" class="date-input"/>
+            <button class="schedule-btn">Сохранить</button>
+          </div>
+        </div> 
+    </form>
+    {% endfor %}
+
+  </div>
+
+</body>
+</html>

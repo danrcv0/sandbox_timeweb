@@ -1,0 +1,89 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+p{
+  color: red;
+  margin-bottom: 10px;
+}
+body {
+  font-family: "Inter", sans-serif;
+  background: #0000cc;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.login-container {
+  background: #fff;
+  padding: 40px;
+  border-radius: 12px;
+  width: 350px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+  text-align: center;
+}
+
+.login-container h1 {
+  font-family: "Montserrat", sans-serif;
+  margin-bottom: 25px;
+  color: #0000cc;
+}
+
+.input-group {
+  margin-bottom: 20px;
+  text-align: left;
+}
+
+.input-group label {
+  font-size: 14px;
+  display: block;
+  margin-bottom: 6px;
+  color: #0000cc;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 10px;
+  border: 2px solid #0000cc;
+  border-radius: 6px;
+  font-size: 14px;
+  outline: none;
+  transition: 0.2s;
+}
+
+.input-group input:focus {
+  border-color: #ff7300;
+}
+
+.login-btn {
+  width: 100%;
+  padding: 12px;
+  background: #ff7300;
+  border: none;
+  border-radius: 6px;
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  transition: 0.2s;
+  font-weight: 600;
+}
+
+.login-btn:hover {
+  opacity: 0.9;
+}
+
+.forgot-password {
+  
+  margin-top: 15px;
+  display: block;
+  color: #0000cc;
+  text-decoration: none;
+  font-size: 14px;
+}
+
+.forgot-password:hover {
+  text-decoration: underline;
+}

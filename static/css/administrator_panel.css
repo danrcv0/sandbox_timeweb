@@ -1,0 +1,282 @@
+/* =======================
+   RESET & BASE STYLES
+======================= */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: "Inter", sans-serif;
+}
+
+body {
+  background: #f5f7fb;
+}
+
+/* =======================
+   LAYOUT
+======================= */
+.main {
+  margin-left: 240px;
+  padding: 30px;
+}
+
+.topbar {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+/* =======================
+   SIDEBAR
+======================= */
+.sidebar {
+  position: fixed;
+  z-index: 10000;
+  left: 0;
+  top: 0;
+  height: 100%;
+  width: 240px;
+  background: #0000cc;
+  color: white;
+  padding: 25px;
+  transition: 0.3s;
+}
+
+.logo {
+  font-weight: 900;
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 50px;
+}
+
+.logo :nth-child(2) {
+  margin-top: -15px;
+}
+
+.menu a {
+  display: block;
+  padding: 12px 15px;
+  margin-bottom: 10px;
+  border-radius: 10px;
+  color: white;
+  text-decoration: none;
+  cursor: pointer;
+  transition: 0.25s;
+}
+
+.menu a:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateX(5px);
+}
+
+.menu a.active {
+  background: #ff7300;
+}
+
+/* =======================
+   BUTTONS
+======================= */
+.btn {
+  background: none;
+  border: none;
+  font-size: 18px;
+  padding: 0;
+  cursor: pointer;
+  transition: 0.2s;
+  margin-left: 5px;
+}
+
+.btn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 15px rgba(255, 115, 0, 0.4);
+}
+
+.btn:active {
+  transform: scale(0.95);
+}
+
+/* =======================
+   FORM ELEMENTS
+======================= */
+.search {
+  padding: 10px 15px;
+  border-radius: 8px;
+  border: 1px solid #ddd;
+  width: 220px;
+}
+
+.profile {
+  background: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+}
+
+.date-input {
+  width: 100%;
+  padding: 10px;
+  border-radius: 10px;
+  border: 1px solid #ccc;
+  margin-bottom: 15px;
+  font-size: 16px;
+}
+
+.comment {
+  width: 100%;
+  height: 120px;
+  border-radius: 15px;
+  border: 1px solid #ccc;
+  padding: 10px;
+  resize: none;
+  margin-bottom: 20px;
+}
+
+/* =======================
+   LIST / CONTENT
+======================= */
+.list {
+  background: white;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.item {
+  display: flex;
+  justify-content: space-between;
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  transition: 0.25s;
+}
+
+.item:hover {
+  background: #f6f8ff;
+  transform: translateX(5px);
+}
+
+.item:last-child {
+  border: none;
+}
+
+/* =======================
+   SECTIONS (TABS)
+======================= */
+.section {
+  display: none;
+  opacity: 0;
+  transform: translateY(15px);
+  transition: 0.35s;
+}
+
+.section.active {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* =======================
+   MODAL
+======================= */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 999;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background: white;
+  width: 550px;
+  max-width: 90%;
+  padding: 35px;
+  border-radius: 25px;
+  position: relative;
+  animation: modalOpen 0.3s ease;
+}
+
+@keyframes modalOpen {
+  from {
+    transform: scale(0.9);
+    opacity: 0;
+  }
+  to {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+.close {
+  position: absolute;
+  right: 15px;
+  top: 15px;
+  font-size: 24px;
+  cursor: pointer;
+}
+
+.schedule-btn {
+  background: #ff7300;
+  color: white;
+  border: none;
+  padding: 12px 25px;
+  border-radius: 20px;
+  cursor: pointer;
+  float: right;
+}
+
+/* =======================
+   MOBILE MENU
+======================= */
+.menu-btn {
+  display: none;
+  position: fixed;
+  top: 20px;
+  left: 20px;
+  background: #0000cc;
+  color: white;
+  border: none;
+  padding: 10px 14px;
+  border-radius: 8px;
+  font-size: 18px;
+  z-index: 2000;
+  cursor: pointer;
+}
+
+.menu-btn_close {
+  display: none;
+  margin-bottom: 30px;
+  color: #fff;
+  background: none;
+  border: none;
+}
+
+/* =======================
+   RESPONSIVE
+======================= */
+@media (max-width: 768px) {
+  .menu-btn {
+    display: block;
+  }
+
+  .sidebar {
+    transform: translateX(-100%);
+  }
+
+  .sidebar.open {
+    transform: translateX(0);
+  }
+
+  .menu-btn_close {
+    display: block;
+  }
+
+  .main {
+    margin-left: 0;
+    padding: 80px 20px;
+  }
+}

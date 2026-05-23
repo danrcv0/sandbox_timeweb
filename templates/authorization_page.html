@@ -1,0 +1,57 @@
+
+
+<!DOCTYPE html>
+<html lang="ru">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Авторизация</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="{{url_for('static', filename='css/authorization_page.css')}}"
+    />
+  </head>
+  <script src="{{url_for('static', filename='js/authorization_page.js')}}"></script>
+  <body>
+
+
+    <div class="login-container">
+      <h1>Вход</h1>
+      <p id="message">{{ message }}</p>
+      <form method="POST" action="/auth/login">
+        <div class="input-group">
+          <label>Логин</label>
+          <input
+            name="login"
+            type="text"
+            placeholder="Введите логин"
+            required
+          />
+        </div>
+
+        <div class="input-group">
+          <label>Пароль</label>
+          <input
+            name="password"
+            type="password"
+            placeholder="Введите пароль"
+            required
+          />
+        </div>
+
+        <button type="submit" class="login-btn">Войти</button>
+
+        <a href="/auth/forgot_password?user_id={{ user_id }}" class="forgot-password" style="display: {{ display }};">Забыли пароль?</a>
+      </form>
+    </div>
+  </body>
+</html>
